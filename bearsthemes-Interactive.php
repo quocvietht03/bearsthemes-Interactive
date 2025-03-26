@@ -145,7 +145,7 @@ add_action( 'wp_enqueue_scripts', 'bti_enqueue_scripts', 999 );
  */
 function bti_interactive_render() {
     if(get_option('bti_enable_toolbar') === 'yes') {
-        $host_name = 'http://landing.local'; // https://beplusthemes.com
+        $host_name = strpos(gethostname(), '.local') ? 'http://landing.local': 'https://beplusthemes.com';
         $theme_name = get_option('bti_theme_name') ? get_option('bti_theme_name') : get_current_theme();
         $primary_color = get_option('bti_primary_color') ? get_option('bti_primary_color') : '#FFCF37';
         $secondary_color = get_option('bti_secondary_color') ? get_option('bti_secondary_color') : '#111111';
