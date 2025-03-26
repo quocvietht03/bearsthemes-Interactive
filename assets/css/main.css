@@ -318,15 +318,6 @@ span.bti-text-name {
     object-fit: cover;
     transition: opacity .2s ease-out;
 }
-.bti-img-hover img.bti-no-image {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 52px;
-    height: 52px;
-    filter: grayscale(1);
-    opacity: .5;
-}
 
 .bti-img-hover:after{
     content: '';

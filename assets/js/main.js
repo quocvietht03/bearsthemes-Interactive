@@ -5,29 +5,26 @@
 
 	// ajax used to request php file
 	function btiAjax() {
+		var btiHost = $('.bti-toolbar').data("host");
 		var btiTheme = $('.bti-toolbar').data("theme");
-		var btiFeatured = $('.bti-toolbar').data("featured");
-		var btiButtonPosition = $('.bti-toolbar').data("button-position");
-		var btiButtonHorizontal = $('.bti-toolbar').data("button-horizontal");
-		var btiButtonAlt = $('.bti-toolbar').data("button-alt");
-		var btiAso = getUrlParameter('aso');
-		var btiAca = getUrlParameter('aca');
-		var btiUtmCampaign = getUrlParameter('utm_campaign');
-		var btiReferrer = document.referrer;
+		// var btiFeatured = $('.bti-toolbar').data("featured");
+		// var btiAso = getUrlParameter('aso');
+		// var btiAca = getUrlParameter('aca');
+		// var btiUtmCampaign = getUrlParameter('utm_campaign');
+		// var btiReferrer = document.referrer;
 
+		
+		
 		$.ajax({
-			url: 'http://landing.local/wp-json/themes/campaign/?theme=' + btiTheme,
+			url: btiHost + '/wp-json/themes/campaign/?theme=' + btiTheme,
 			type: "GET",
 			data: {
 				theme: btiTheme,
-				featured: btiFeatured,
-				btnpos: btiButtonPosition,
-				btnhorizontal: btiButtonHorizontal,
-				btnalt: btiButtonAlt,
-				aso: btiAso,
-				aca: btiAca,
-				utmCampaign: btiUtmCampaign,
-				referrer: btiReferrer,
+				// featured: btiFeatured,
+				// aso: btiAso,
+				// aca: btiAca,
+				// utmCampaign: btiUtmCampaign,
+				// referrer: btiReferrer,
 			},
 			success: function (data) {
 				$('.bti-toolbar').html(data);
@@ -50,53 +47,53 @@
 
 	// lazy-load
 	function btiLazyLoad() {
-		
-			var imagePlaceholder = new Image();
-			$(imagePlaceholder).on('load', function () {
-				var load = function() {
-					$('.bti-list .bti-lazy-load img:not(.bti-lazy-loading)').each(function (i, object) {
-						object = $(object);
-						var rect = object[0].getBoundingClientRect(),
-							vh = ($(window).height() || document.documentElement.clientHeight),
-							vw = ($(window).width() || document.documentElement.clientWidth),
-							oh = object.outerHeight(),
-							ow = object.outerWidth();
+		var btiHost = $('.bti-toolbar').data("host");
+		var imagePlaceholder = new Image();
+		$(imagePlaceholder).on('load', function () {
+			var load = function() {
+				$('.bti-list .bti-lazy-load img:not(.bti-lazy-loading)').each(function (i, object) {
+					object = $(object);
+					var rect = object[0].getBoundingClientRect(),
+						vh = ($(window).height() || document.documentElement.clientHeight),
+						vw = ($(window).width() || document.documentElement.clientWidth),
+						oh = object.outerHeight(),
+						ow = object.outerWidth();
+					
+					
+					if (
+						(rect.top != 0 || rect.right != 0 || rect.bottom != 0 || rect.left != 0) &&
+						(rect.top >= 0 || rect.top + oh >= 0) &&
+						(rect.bottom >= 0 && rect.bottom - oh - vh <= 300) &&
+						(rect.left >= 0 || rect.left + ow >= 0) &&
+						(rect.right >= 0 && rect.right - ow - vw <= 0)
+					) {
 						
+						object.addClass('bti-lazy-loading');
 						
-						if (
-							(rect.top != 0 || rect.right != 0 || rect.bottom != 0 || rect.left != 0) &&
-							(rect.top >= 0 || rect.top + oh >= 0) &&
-							(rect.bottom >= 0 && rect.bottom - oh - vh <= 300) &&
-							(rect.left >= 0 || rect.left + ow >= 0) &&
-							(rect.right >= 0 && rect.right - ow - vw <= 0)
-						) {
-							
-							object.addClass('bti-lazy-loading');
-							
-							var imageObj = new Image();
-							
-							$(imageObj).on('load', function () {
-								var $this = $(this);
-								object.attr('src', $this.attr('src'));
-								object
-									.removeAttr('data-image')
-									.removeData('image')
-									.removeClass('bti-lazy-loading');
-								object.parent().removeClass('bti-lazy-load');
-							}).attr('src', object.data('image'));
-						}
-					});
-				}
-				
-				$('.bti-theme-dropdown .bti-btn').on('click', function () {
-					setTimeout(function(){load();},500); //0.5s is animation time of toolbar showing
+						var imageObj = new Image();
+						
+						$(imageObj).on('load', function () {
+							var $this = $(this);
+							object.attr('src', $this.attr('src'));
+							object
+								.removeAttr('data-image')
+								.removeData('image')
+								.removeClass('bti-lazy-loading');
+							object.parent().removeClass('bti-lazy-load');
+						}).attr('src', object.data('image'));
+					}
 				});
-				
-				$(".bti-list").scroll(function() {
-					load();
-				});
-				
-			}).attr('src', 'https://toolbar.qodeinteractive.com/_toolbar/assets/img/rbt-placeholder.jpg');
+			}
+			
+			$('.bti-theme-dropdown .bti-btn').on('click', function () {
+				setTimeout(function(){load();},500); //0.5s is animation time of toolbar showing
+			});
+			
+			$(".bti-list").scroll(function() {
+				load();
+			});
+			
+		}).attr('src', btiHost + '/wp-content/themes/bedemo/assets/images/bti-placeholder.jpg');
 	}
 
 	// open/close logic

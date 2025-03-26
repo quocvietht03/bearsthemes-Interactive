@@ -145,12 +145,13 @@ add_action( 'wp_enqueue_scripts', 'bti_enqueue_scripts', 999 );
  */
 function bti_interactive_render() {
     if(get_option('bti_enable_toolbar') === 'yes') {
+        $host_name = 'http://landing.local'; // https://beplusthemes.com
         $theme_name = get_option('bti_theme_name') ? get_option('bti_theme_name') : get_current_theme();
         $primary_color = get_option('bti_primary_color') ? get_option('bti_primary_color') : '#FFCF37';
         $secondary_color = get_option('bti_secondary_color') ? get_option('bti_secondary_color') : '#111111';
         
         ?>
-            <div class="bti-toolbar" data-theme="<?php echo esc_attr($theme_name); ?>" style="<?php echo '--bti-primary-color: ' . esc_attr($primary_color) . '; --bti-secondary-color: ' . esc_attr($secondary_color) . ';'; ?>"></div>
+            <div class="bti-toolbar" data-host="<?php echo esc_attr($host_name); ?>" data-theme="<?php echo esc_attr($theme_name); ?>" style="<?php echo '--bti-primary-color: ' . esc_attr($primary_color) . '; --bti-secondary-color: ' . esc_attr($secondary_color) . ';'; ?>"></div>
         <?php
     }
 }
