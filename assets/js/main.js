@@ -5,7 +5,6 @@
 
 	// ajax used to request php file
 	function btiAjax() {
-		var btiHost = $('.bti-toolbar').data("host");
 		var btiTheme = $('.bti-toolbar').data("theme");
 		// var btiFeatured = $('.bti-toolbar').data("featured");
 		// var btiAso = getUrlParameter('aso');
@@ -16,7 +15,7 @@
 		
 		
 		$.ajax({
-			url: btiHost + '/wp-json/themes/campaign/?theme=' + btiTheme,
+			url: 'https://beplusthemes.com/wp-json/themes/campaign/?theme=' + btiTheme,
 			type: "GET",
 			data: {
 				theme: btiTheme,
@@ -47,7 +46,6 @@
 
 	// lazy-load
 	function btiLazyLoad() {
-		var btiHost = $('.bti-toolbar').data("host");
 		var imagePlaceholder = new Image();
 		$(imagePlaceholder).on('load', function () {
 			var load = function() {
@@ -93,7 +91,7 @@
 				load();
 			});
 			
-		}).attr('src', btiHost + '/wp-content/themes/bedemo/assets/images/bti-placeholder.jpg');
+		}).attr('src', 'https://beplusthemes.com/wp-content/themes/bedemo/assets/images/bti-placeholder.jpg');
 	}
 
 	// open/close logic
