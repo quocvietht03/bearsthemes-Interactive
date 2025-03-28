@@ -305,7 +305,7 @@ span.bti-text-name {
     background-color: #f5f5f5;
     position: relative;
     overflow: hidden;
-    padding-bottom: 66.66%;
+    padding-bottom: 50%;
     border-radius: 4px;
     box-shadow: 0 0 0 1px rgba(0,0,0,.03);
 }
