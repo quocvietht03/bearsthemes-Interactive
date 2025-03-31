@@ -122,9 +122,9 @@
 		var currentScroll = $(window).scrollTop();
 		$(window).scroll(function () {
 			var newScroll = $(window).scrollTop();
-			if (Math.abs(newScroll - currentScroll) > 1000) {
+			if (Math.abs(newScroll - currentScroll) > 1500) {
 				if (list.hasClass('bti-active')) {
-					list.removeClass('bti-active');
+					// list.removeClass('bti-active');
 					splitScreenPresent && $.fn.multiscroll.setMouseWheelScrolling(true);
 					fullPagePresent && $.fn.fullpage.setMouseWheelScrolling(true);
 				}

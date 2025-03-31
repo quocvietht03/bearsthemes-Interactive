@@ -90,24 +90,27 @@ body.admin-bar section.bti-sidearea {
     display: block;
     width: 115px;
     transform: translateX(100%);
-    transition: all .25s cubic-bezier(0.23, 1, 0.32, 1) .45s;
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1) .45s;
 }
 
 .bti-loaded .bti-theme-dropdown,
-.bti-loaded .bti-purchase{
-    -webkit-transform: translateX(0);
+.bti-loaded .bti-purchase, 
+.bti-loaded .bti-theme-dropdown:hover,
+.bti-loaded .bti-purchase:hover {
     transform: translateX(0);
 }
 
 .bti-active .bti-theme-dropdown,
-.bti-active .bti-purchase {
-    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+.bti-active .bti-purchase,
+.bti-active .bti-theme-dropdown:hover,
+.bti-active .bti-purchase:hover {
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateX(73px);
 }
 
 .bti-scrolled .bti-theme-dropdown,
 .bti-scrolled .bti-purchase {
-    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateX(73px);
 }
 
@@ -353,7 +356,7 @@ span.bti-text-name {
     color: var(--bti-secondary-color, #111);
     display: block;
     margin-bottom: 4px;
-    transition: color .2s ease-out;
+    transition: color .3s ease-out;
     text-transform: capitalize !important;
     font-weight: 600 !important;
     letter-spacing: .1em;
