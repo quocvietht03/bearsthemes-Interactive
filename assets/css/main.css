@@ -54,6 +54,7 @@ div.bti-toolbar a{
     display: block;
     font-size: 0;
     line-height: 0;
+    text-decoration: none;
 }
 
 div.bti-toolbar a img{
@@ -132,6 +133,7 @@ body.admin-bar section.bti-sidearea {
 }
 
 .bti-theme-dropdown .bti-icon img {
+    display: inline-block;
     animation: btiFilterGray 1.5s infinite forwards;
 }
 
