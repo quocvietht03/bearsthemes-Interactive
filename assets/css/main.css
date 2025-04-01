@@ -480,6 +480,10 @@ span.bti-text-name {
     border-radius: 0 4px 4px 0;
 }
 
+.bti-theme-dropdown .bti-icon svg {
+    transform: translate(-50%, -50%) scaleX(-1);
+}
+
 .rtl .bti-list {
     margin-left: -18px;
     margin-right: 0;
