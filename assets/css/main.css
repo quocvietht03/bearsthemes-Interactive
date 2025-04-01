@@ -65,6 +65,7 @@ section.bti-sidearea {
     width: 382px;
     height: 100%;
     min-height: 100%;
+    padding: 0;
     position: fixed;
     right: -382px;
     top: 0;
