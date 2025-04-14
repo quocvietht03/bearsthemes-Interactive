@@ -51,6 +51,7 @@ function bti_register_settings() {
     register_setting('bti_settings_group', 'bti_theme_name');
     register_setting('bti_settings_group', 'bti_primary_color');
     register_setting('bti_settings_group', 'bti_secondary_color');
+    register_setting('bti_settings_group', 'bti_reset_data_field');
 
     // Add settings section
     add_settings_section(
@@ -94,6 +95,16 @@ function bti_register_settings() {
         'bti_secondary_color_callback',
         'bti-interactive-settings',
         'bti_settings_section'
+        
+    );
+
+    // Add "Reset LocalStorage" button
+    add_settings_field(
+        'bti_reset_data_field',
+        'Reset Data',
+        'bti_reset_data_callback',
+        'bti-interactive-settings',
+        'bti_settings_section'
     );
 }
 
@@ -124,6 +135,20 @@ function bti_primary_color_callback() {
 function bti_secondary_color_callback() {
     $value = get_option('bti_secondary_color', '#111111');
     echo '<input type="color" name="bti_secondary_color" value="' . esc_attr($value) . '" />';
+}
+
+function bti_reset_data_callback() {
+    ?>
+    <button type="button" class="button button-secondary" id="bti-reset-data">Reset Data</button>
+    <script>
+        document.getElementById('bti-reset-data').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset Data Storage?')) {
+                window.localStorage.removeItem('btiTheme');
+                alert('Data Storage has been reset.');
+            }
+        });
+    </script>
+    <?php
 }
 
 $enable_toolbar = get_option('bti_enable_toolbar');

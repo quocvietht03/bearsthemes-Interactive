@@ -12,27 +12,38 @@
 		// var btiUtmCampaign = getUrlParameter('utm_campaign');
 		// var btiReferrer = document.referrer;
 
+		var btiThemeStorage = window.localStorage.getItem('btiTheme');
+		var btiThemeArr = JSON.parse(btiThemeStorage);
 		
+		if (btiThemeArr && btiThemeArr[0] === btiTheme) {
+			$('.bti-toolbar').html(btiThemeArr[1]);
+			btiLazyLoad();
+			btiListToggle();
+			btiSmoothScrollCompatibility();
+			showList();
+		} else {
+			$.ajax({
+				url: 'https://beplusthemes.com/wp-json/themes/campaign/?theme=' + btiTheme,
+				type: "GET",
+				data: {
+					theme: btiTheme,
+					// featured: btiFeatured,
+					// aso: btiAso,
+					// aca: btiAca,
+					// utmCampaign: btiUtmCampaign,
+					// referrer: btiReferrer,
+				},
+				success: function (data) {
+					$('.bti-toolbar').html(data);
+					localStorage.setItem('btiTheme', JSON.stringify([btiTheme, data]));
+					btiLazyLoad();
+					btiListToggle();
+					btiSmoothScrollCompatibility();
+					showList();
+				}
+			});
+		}
 		
-		$.ajax({
-			url: 'https://beplusthemes.com/wp-json/themes/campaign/?theme=' + btiTheme,
-			type: "GET",
-			data: {
-				theme: btiTheme,
-				// featured: btiFeatured,
-				// aso: btiAso,
-				// aca: btiAca,
-				// utmCampaign: btiUtmCampaign,
-				// referrer: btiReferrer,
-			},
-			success: function (data) {
-				$('.bti-toolbar').html(data);
-				btiLazyLoad();
-				btiListToggle();
-				btiSmoothScrollCompatibility();
-				showList();
-			}
-		});
 	}
 
 	function btiLoadScript(url, onSuccess) {
