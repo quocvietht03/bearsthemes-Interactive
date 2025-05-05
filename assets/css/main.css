@@ -552,6 +552,7 @@ div.bti-toolbar a.bti-buy-on-envato:hover svg {
 .rtl div.bti-toolbar a.bti-buy-on-envato {
     right: auto;
     left: 20px;
+    padding: 12px 12px 12px 16px;
 }
 
 @media(max-width: 767.98px){
