@@ -14,8 +14,24 @@
 
 		var btiThemeStorage = window.localStorage.getItem('btiTheme');
 		var btiThemeArr = JSON.parse(btiThemeStorage);
+		var btiRequest = false;
 		
-		if (btiThemeArr && btiThemeArr[0] === btiTheme) {
+		// Clear local storage btiTheme after 1 day
+		if (btiThemeArr && btiThemeArr[2] !== undefined) {
+			var btiThemeTimestamp = btiThemeArr[2];
+			var btiOneDay = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+			var btiNow = new Date().getTime();
+			
+			if (btiThemeTimestamp && btiNow - btiThemeTimestamp > btiOneDay) {
+				window.localStorage.removeItem('btiTheme');
+				btiRequest = true;
+			}
+		} else {
+			window.localStorage.removeItem('btiTheme');
+			btiRequest = true;
+		}
+
+		if (btiThemeArr && btiThemeArr[0] === btiTheme && btiRequest === false) {
 			$('.bti-toolbar').html(btiThemeArr[1]);
 			btiLazyLoad();
 			btiListToggle();
@@ -35,7 +51,8 @@
 				},
 				success: function (data) {
 					$('.bti-toolbar').html(data);
-					localStorage.setItem('btiTheme', JSON.stringify([btiTheme, data]));
+					var btiTime = new Date().getTime();
+					localStorage.setItem('btiTheme', JSON.stringify([btiTheme, data, btiTime]));
 					btiLazyLoad();
 					btiListToggle();
 					btiSmoothScrollCompatibility();
