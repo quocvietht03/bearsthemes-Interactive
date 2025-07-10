@@ -556,9 +556,9 @@ div.bti-toolbar a.bti-buy-on-envato:hover svg {
 }
 
 @media(max-width: 767.98px){
-    /* .bti-toolbar {
-        display: none;
-    } */
+    .bti-toolbar {
+        display: none !important;
+    }
     section.bti-sidearea {
         width: 282px;
         right: -282px;
